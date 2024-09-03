@@ -6,8 +6,8 @@ provider:
   runtime: nodejs18.x
 
 functions:
-  hello:
-    handler: handler.hello
+  api:
+    handler: index.handler
     events:
       - httpApi:
           path: /
