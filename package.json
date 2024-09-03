@@ -1,7 +1,6 @@
 {
-  "name": "ven-serverless-app",
+  "name": "3.7-serverless-withapi",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +8,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "serverless": "^4.2.4"
+  "description": "",
+  "dependencies": {
+    "offline": "^0.0.1",
+    "sls": "^0.1.0"
   }
 }
