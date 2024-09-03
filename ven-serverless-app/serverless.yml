@@ -1,0 +1,29 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: steeng
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: serverless-project1-httpapi
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-southeast-1
+  httpApi:
+    cors: true
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+
+  test:
+    handler: functest.test
+    events:
+      - httpApi:
+          path: /test
+          method: get
+
+plugins:
+  - serverless-offline
