@@ -15,5 +15,41 @@ functions:
       - httpApi:
           path: /
           method: get
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - venSQSQueue
+              - Arn
+          batchSize: 10
+          maximumBatchingWindow: 60
+          functionResponseType: ReportBatchItemFailures
+
+resources:
+  Resources:
+    venSQSQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: ven-sqs-queue
+
 plugins:
   - serverless-offline
+
+      # - sqs:
+      #     arn: arn:aws:sqs:ap-southeast-1:255945442255:ven-sqs
+      #     batchSize: 10
+      #     maximumBatchingWindow: 60
+      #     functionResponseType: ReportBatchItemFailures
+      # -sqs:
+      #   arn:
+      #     FN::GetAtt:
+      #       - ven-sqs
+      #       - Arn
+
+# resources:
+#   Resources:
+#     ven-sqs:
+#       Type: "AWS::SQS::Queue"
+#       Properties:
+
+# plugins:
+#   - serverless-offline
