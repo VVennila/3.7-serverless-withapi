@@ -10,3 +10,16 @@ module.exports.handler = async (event) => {
     ),
   };
 };
+module.exports.handler1 = async (event1) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: "serverless for S3",
+      },
+      null,
+      2
+    ),
+  };
+};
+

@@ -24,6 +24,24 @@ functions:
           maximumBatchingWindow: 60
           functionResponseType: ReportBatchItemFailures
 
+  rateHandler:
+    handler: handler.cronrun
+    events:
+      - schedule: cron(0/2 * ? * MON *)
+
+  s3Handler:
+    handler: index.handler1
+    events:
+      - httpApi:
+          path: /s3
+          method: get
+      - s3:
+          bucket: vens3
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploads/
+            - suffix: .jpg
+
 resources:
   Resources:
     venSQSQueue:
@@ -31,25 +49,13 @@ resources:
       Properties:
         QueueName: ven-sqs-queue
 
+    venS3:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: vens31
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+
 plugins:
   - serverless-offline
-
-      # - sqs:
-      #     arn: arn:aws:sqs:ap-southeast-1:255945442255:ven-sqs
-      #     batchSize: 10
-      #     maximumBatchingWindow: 60
-      #     functionResponseType: ReportBatchItemFailures
-      # -sqs:
-      #   arn:
-      #     FN::GetAtt:
-      #       - ven-sqs
-      #       - Arn
-
-# resources:
-#   Resources:
-#     ven-sqs:
-#       Type: "AWS::SQS::Queue"
-#       Properties:
-
-# plugins:
-#   - serverless-offline
